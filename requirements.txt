@@ -2,3 +2,4 @@ tensorflow
 wave
 numpy==1.24.3
 matplotlib
+json

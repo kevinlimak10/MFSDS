@@ -11,7 +11,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def process(buffer):
     processed_buffer = []
     all_formulas = getFormulas()
-
+    
     for i in range(0, len(buffer)):
         print(buffer[i])
         binary_image = buffer[i]['figure_buffer']
@@ -22,12 +22,12 @@ def process(buffer):
             binary_data = binary_image.getvalue()  # Get the bytes from the BytesIO object
             f.write(binary_data)
         simility = []
-        print(all_formulas)
         for y in range(0, len(all_formulas)):
             form = './formula/' + all_formulas[y]
             simility.append({'formula': all_formulas[y], 'percent': compare_images(form,path)})
-        print(simility)
-    return None
+        max_similarity = max(simility, key=lambda x: x['percent'])
+        processed_buffer.append( { 'analised': buffer[i]['title'], 'simility': max_similarity })
+    return processed_buffer
 
 def load_and_preprocess_image(image_path, target_size):
     img = load_img(image_path, target_size=target_size)
