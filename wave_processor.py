@@ -4,9 +4,9 @@ import uuid
 import numpy as np
 from keras.applications.vgg16 import VGG16
 from keras.applications.vgg16 import preprocess_input
-from keras.losses import cosine_similarity
 from keras.models import Model
 from keras.preprocessing.image import img_to_array, load_img
+from sklearn.metrics.pairwise import cosine_similarity
 
 def process(buffer):
     processed_buffer = []
@@ -25,7 +25,8 @@ def process(buffer):
         print(all_formulas)
         for y in range(0, len(all_formulas)):
             form = './formula/' + all_formulas[y]
-            simility.append(form,compare_images(form,path))
+            simility.append({'formula': all_formulas[y], 'percent': compare_images(form,path)})
+        print(simility)
     return None
 
 def load_and_preprocess_image(image_path, target_size):
