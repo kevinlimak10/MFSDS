@@ -16,7 +16,7 @@ def process(buffer):
         print(buffer[i])
         binary_image = buffer[i]['figure_buffer']
         name_file = uuid.uuid4()
-        path = "./tmp/" + str(name_file) + ".wav"
+        path = "./tmp/" + str(name_file) + ".png"
         with open(path, "wb") as f:
             binary_image.seek(0)  # Make sure to move the cursor to the beginning of the BytesIO object
             binary_data = binary_image.getvalue()  # Get the bytes from the BytesIO object
