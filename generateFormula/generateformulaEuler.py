@@ -1,44 +1,50 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import uuid
 
-# Define Euler's formula function with frequency, phase, and amplitude
-def euler_formula(x, amplitude=1, frequency=1, phase=0):
-    return amplitude * (np.cos(frequency * x + phase) + 1j * np.sin(frequency * x + phase))
+def plot_cartesian_function(func, x_range, key, func_str):
+    """
+    Plot a given function on a Cartesian graph and save it as an image.
 
-# Define a range of x values
-x_values = np.linspace(0, 2 * np.pi, 1000)
+    Parameters:
+    - func: The function to be plotted.
+    - x_range: A tuple (start, end) defining the range of x values for the plot.
+    - key: The unique identifier for the plot image filename.
+    - func_str: The string representation of the function.
+    """
+    x = np.linspace(x_range[0], x_range[1], 1000)
+    y = func(x)
 
-# Parameters
-amplitude = 2
-frequency = 1
-phase = np.pi / 4
+    plt.figure(figsize=(10, 6))
 
-# Compute euler formula values with the given parameters
-euler_values = euler_formula(x_values, amplitude, frequency, phase)
+    # Plot real part
+    plt.plot(x, np.real(y), label=f'Re({func_str})', color='blue')
+    plt.xlabel('x')
+    plt.ylabel(f'Re({func_str})')
+    plt.legend()
+    plt.grid(True)
 
-# Extract real and imaginary parts
-real_parts = np.real(euler_values)
-imaginary_parts = np.imag(euler_values)
+    plt.savefig(f'{key}.png')
 
-# Plotting
-plt.figure(figsize=(10, 6))
+    with open('function.txt', 'a', encoding='utf-8') as file:
+        file.write(f"{key} = {func_str}\n")
 
-# Plot real part
-plt.subplot(2, 1, 1)
-plt.plot(x_values, real_parts, label='Re($e^{i(fx + \phi)}$) = A cos(fx + \u03C6)', color='blue')
-plt.title('Euler Formula with Amplitude, Frequency, and Phase')
-plt.xlabel('x')
-plt.ylabel('Re($e^{i(fx + \phi)}$)')
-plt.legend()
-plt.grid(True)
 
-# Plot imaginary part
-plt.subplot(2, 1, 2)
-plt.plot(x_values, imaginary_parts, label='Im($e^{i(fx + \phi)}$) = A sin(fx + \u03C6)', color='red')
-plt.xlabel('x')
-plt.ylabel('Im($e^{i(fx + \phi)}$)')
-plt.legend()
-plt.grid(True)
+# Define the function you want to plot
+def my_function(x):
+    amplitude = 17  # Adjust amplitude as needed
+    frequency = 11  # Adjust frequency as needed
 
-plt.tight_layout()
-plt.show()
+    phase = np.pi ** 3  # Adjust phase as needed
+    func_str = f'{amplitude} * exp(1j * ({frequency} * x + π^3))'
+    return amplitude * np.exp(1j * (frequency * x + phase)), func_str
+
+# Define the range of x values and the filename
+x_range = (0, 2 * np.pi)
+key = str(uuid.uuid4())
+
+# Get the function values and its string representation
+y, func_str = my_function(np.linspace(x_range[0], x_range[1], 1000))
+
+# Call the function to plot and save the image
+plot_cartesian_function(lambda x: my_function(x)[0], x_range, key, func_str)

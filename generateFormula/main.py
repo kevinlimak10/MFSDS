@@ -30,9 +30,9 @@ def plot_cartesian_function(func, x_range, key,func_str):
 # Example usage:
 # Define the function you want to plot
 def my_function(x):
-    frequency = .6  # Adjust frequency as needed
-    amplitude = .3  # Adjust amplitude as needed
-    phase = np.tan(np.pi / 4)
+    frequency = .4  # Adjust frequency as needed
+    amplitude = 1  # Adjust amplitude as needed
+    phase = np.tan(np.pi)
     complex_sine_wave = amplitude * np.exp(1j * (2 * np.pi * frequency * x + phase))
     return complex_sine_wave
 
@@ -41,4 +41,4 @@ x_range = (-2*np.pi, 2*np.pi)
 key = str(uuid.uuid4())
 
 # Call the function to plot and save the image
-plot_cartesian_function(my_function, x_range, key, '.3*eˆ(1j*2*pi*.6*x+tan(pi/4)')
+plot_cartesian_function(my_function, x_range, key, '.3*eˆ(1j*2*pi*.6*x+tan(pi)')

@@ -9,6 +9,8 @@ def main():
                 for archive in os.listdir(directory):
                         filepath = os.path.join(directory, archive)
                         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                        #apply dft
+                        #
                         buffer = wave_analise.save_audio_in_chunks(filepath, chunk_size_ms=100)
                         processed_waves = wave_processor.process(buffer)
                         
