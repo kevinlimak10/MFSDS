@@ -1,19 +1,9 @@
-# Step 1: Data Collection and Preprocessing
-
-# Load images and their corresponding labels (amplitude, frequency, phase)
-# Preprocess the images if necessary (resizing, normalization, etc.)
-# Split the data into training and testing sets
-
-# Step 2: Feature Extraction
-
-# Apply feature extraction techniques (e.g., edge detection, contour detection, etc.)
-# Extract relevant features from the images
-
-# Step 3: Model Training
-
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import os
+import cv2
+import numpy as np
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)
@@ -49,11 +39,6 @@ print("Accuracy for Phase:", accuracy_phase)
 # Given a new graph image, apply feature extraction
 # Use the trained classifiers to predict the attributes (higher, lower, medium)
 # Output the predictions
-
-import os
-import cv2
-import numpy as np
-
 
 # Function to load images and corresponding labels
 def load_data(root_dir):
