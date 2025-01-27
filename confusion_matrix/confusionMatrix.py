@@ -35,7 +35,6 @@ class_names = validation_generator.class_names
 normalization_layer = Rescaling(1./255)
 normalized_validator = validation_generator.map(lambda x, y: (normalization_layer(x), y))
 
-
 # Get predictions
 y_pred = []
 y_true = []
@@ -44,7 +43,6 @@ for images, labels in normalized_validator:
     preds = model.predict(images)
     y_pred.extend(np.argmax(preds, axis=1))
     y_true.extend(np.argmax(labels.numpy(), axis=1))
-
 
 # # Calculate confusion matrix
 cm = confusion_matrix(y_true, y_pred)
