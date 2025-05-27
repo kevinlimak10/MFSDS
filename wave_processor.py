@@ -13,7 +13,6 @@ def process(buffer):
     all_formulas = getFormulas()
     
     for i in range(0, len(buffer)):
-        print(buffer[i])
         binary_image = buffer[i]['figure_buffer']
         name_file = uuid.uuid4()
         path = "./tmp/" + str(name_file) + ".png"
